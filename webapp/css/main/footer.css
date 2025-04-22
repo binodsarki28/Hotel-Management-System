@@ -1,0 +1,111 @@
+@charset "UTF-8";
+
+/* General Footer Styling */
+.hotel-footer {
+    background-color: #608196;
+    color: #fff;
+    padding: 15px 10px; /* Adjusted padding for a compact footer */
+    font-family: 'Arial', sans-serif;
+    width: 100%; /* Ensures footer takes full width */
+    border-radius: 15px; /* Makes the footer border rounded like a card */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow to enhance the card look */
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px; /* Smaller gap between sections */
+    align-items: center; /* Center items vertically */
+}
+
+.footer-section {
+    width: 30%;
+    margin-bottom: 8px; /* Reduced margin for a tighter layout */
+}
+
+.footer-section h2 {
+    font-size: 18px; /* Slightly smaller font size */
+    margin-bottom: 8px;
+    color: black; /* Gold */
+}
+
+.footer-section p, .footer-section ul {
+    font-size: 15px; /* Reduced font size for a tighter layout */
+    color: black; /* Light Yellow */
+}
+
+.footer-section ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.footer-section ul li {
+    margin: 4px 0; /* Reduced margin for list items */
+}
+
+.footer-section .logo img {
+    width: 150px;  /* Set width */
+    height: 150px; /* Set height to make it a perfect circle */
+    display: block; /* Ensure it doesn't float */
+    margin: 0 auto; /* Center the logo horizontally */
+    border-radius: 50%; /* Makes the logo image circular */
+}
+
+.social-icons a {
+    margin-right: 20px; 
+    display: inline-block;
+    text-decoration: underline;
+}
+
+.social-icons img {
+    width: 50px;         /* Bigger icon size */
+    height: 50px;
+    transition: transform 0.3s ease;
+}
+
+
+.social-icons img:hover {
+    transform: scale(1.1);
+}
+
+.footer-section h2{
+	font-size: 30px;
+	text-decoration: underline;
+}
+ 
+/* Footer Bottom */
+.footer-bottom {
+    text-align: center;
+    margin-top: 15px; /* Reduced margin for footer bottom */
+    font-size: 0.8rem; /* Smaller font size */
+}
+
+.footer-bottom p {
+    margin: 4px 0; /* Reduced margin for footer text */
+    font-size: 14px; 
+    color: black;
+} /* Missing closing brace added here */
+
+/* Responsive Styling for Small Screens */
+@media (max-width: 768px) {
+    .footer-section {
+        width: 45%;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-section {
+        width: 100%;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Ensure space between service and footer */
+.container {
+    margin-bottom: 30px; /* Adds space between service and footer */
+}

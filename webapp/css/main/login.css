@@ -1,0 +1,99 @@
+@charset "UTF-8";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Background and layout */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+
+.login-container {
+  width: 50%;
+  max-width: 350px;
+  margin-bottom: 80px; 
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.login-title {
+  font-size: 2rem;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.form-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers the input field */
+  margin-bottom: 15px;
+  width: 100%; /* Ensures the field takes full available width */
+}
+
+.form-label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-align: left; /* Keeps label left-aligned */
+  width: 100%; /* Makes label take full width */
+}
+
+.form-input {
+  width: 80%; /* Ensures input takes full width of the container */
+  padding: 8px 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s ease;
+  margin: 0 auto; /* Centers the input field */
+}
+
+
+
+.form-input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.submit-btn {
+  width: 50%;
+  padding: 10px;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  display: flex; /* Enables flexbox */
+  justify-content: center; /* Center text inside the button */
+  align-items: center; /* Center text vertically */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 0 auto; /* Center the button horizontally */
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+}
+
+
+.register-info {
+  text-align: center;
+  margin-top: 20px;
+}
+

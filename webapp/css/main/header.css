@@ -1,0 +1,132 @@
+@charset "UTF-8";
+
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin-top: 70px; /* Space for fixed header */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Fixed Header Styles */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #608196;
+  color: white;
+  height: 90px; /* Set a fixed height */
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Container for managing header content */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;  /* Allow flex items to wrap */
+}
+
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  margin: 0;
+  font-size: 1.45em;
+}
+
+.logo a img {
+  height: 80px;  /* Adjust size as needed */
+  width: 80px;   /* Ensure the width and height are equal to maintain the circle */
+  border-radius: 50%; /* Make the image circular */
+  object-fit: cover;  /* Ensures the image fills the circle without distortion */
+}
+
+
+.hotel-name {
+  font-size: 1.8em;
+  color: white;
+  margin: 0;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Navbar Styling */
+.nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  flex: 2;  /* Ensure navbar items take the remaining space */
+  justify-content: flex-end;  /* Align navbar items to the right */
+  flex-wrap: wrap;  /* Allow wrapping on small screens */
+}
+
+.nav ul li {
+  position: relative;
+}
+
+/* Navbar Links Styling */
+.nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: 4px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Hover effect for Navbar Links */
+.nav ul li a:hover {
+  background-color: #FF6347;  /* Tomato color for hover effect */
+  color: #000;  /* Change text color to black on hover */
+}
+
+/* Responsive Design: Stack navbar items on smaller screens */
+@media screen and (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .logo-wrapper {
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .nav ul {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .nav ul li {
+    width: 100%;
+    text-align: left;
+    padding: 10px 0;
+  }
+
+  /* Center logo on small screens */
+  .logo {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .hotel-name {
+    text-align: center;
+    font-size: 1.4em;
+    margin-top: 5px;
+  }
+}

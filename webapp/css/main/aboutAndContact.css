@@ -1,0 +1,371 @@
+@charset "UTF-8";
+
+/* Global Styles */
+:root {
+    --primary-color: #7242f5;
+    --secondary-color: #333;
+    --light-color: #fff;
+    --gray-color: #f4f4f4;
+    --dark-gray: #666;
+    --border-color: #ddd;
+    --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-primary);
+    line-height: 1.6;
+    color: var(--secondary-color);
+}
+
+a {
+    text-decoration: none;
+    color: var(--secondary-color);
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+}
+
+/* Hero Section */
+.hero {
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    text-align: center;
+    padding: 60px 0;
+    margin-bottom: 40px;
+}
+
+.hero h1 {
+    font-size: 42px;
+    margin-bottom: 0;
+}
+
+/* Company Intro Section */
+.company-intro {
+    padding: 0 10%;
+    margin-bottom: 40px;
+}
+
+.intro-content {
+    display: flex;
+    gap: 5%;
+}
+
+.established {
+    flex: 1;
+}
+
+.established h2 {
+    color: var(--primary-color);
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.intro-text {
+    flex: 2;
+}
+
+.highlight-text {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+/* Quote Section */
+.quote-section {
+    padding: 60px 10%;
+    text-align: center;
+    background-color: var(--gray-color);
+}
+
+.quote p {
+    font-style: italic;
+    font-size: 24px;
+    color: var(--dark-gray);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* City Image */
+.city-image {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+}
+
+.newbaneshwor-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Mission, Vision, Values Section */
+.mission-vision-values {
+    display: flex;
+    padding: 60px 10%;
+    gap: 40px;
+    background-color: var(--light-color);
+}
+
+.mission-section,
+.vision-section,
+.values-section {
+    flex: 1;
+}
+
+.mission-vision-values h2 {
+    color: var(--primary-color);
+    position: relative;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.mission-vision-values h2::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 50px;
+    background-color: var(--primary-color);
+}
+
+/* Why Choose Section */
+.why-choose {
+    padding: 60px 10%;
+    background-color: var(--gray-color);
+}
+
+.why-choose h2 {
+    color: var(--primary-color);
+    font-size: 32px;
+    margin-bottom: 30px;
+}
+
+.why-choose p {
+    margin-bottom: 20px;
+    max-width: 800px;
+}
+
+/* Greeting Section */
+.greeting-section {
+    padding: 60px 10%;
+    background-color: var(--light-color);
+    text-align: center;
+}
+
+.greeting-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+/* Founder Section */
+.founder {
+    display: flex;
+    padding: 60px 10%;
+    gap: 40px;
+    background-color: var(--light-color);
+}
+
+.founder-image {
+    flex: 1;
+    text-align: center;
+}
+
+.founder-img {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.founder-bio {
+    flex: 2;
+}
+
+.founder-bio h3 {
+    color: var(--primary-color);
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.founder-bio p {
+    margin-bottom: 20px;
+}
+
+.founder-bio strong {
+    font-weight: bold;
+}
+
+/* Join Team Section */
+.join-team {
+    padding: 60px 10%;
+    background-color: var(--gray-color);
+    text-align: center;
+}
+
+.join-team h2 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+/* Contact Page Styles */
+.contact-intro {
+    padding: 0 10%;
+    margin-bottom: 40px;
+    text-align: center;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contact-content {
+    display: flex;
+    padding: 0 10%;
+    gap: 60px;
+    margin-bottom: 60px;
+}
+
+.contact-form-container {
+    flex: 2;
+}
+
+.contact-info {
+    flex: 1;
+}
+
+.contact-form {
+    background-color: var(--gray-color);
+    padding: 30px;
+    border-radius: 8px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-family: var(--font-primary);
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-group input {
+    width: auto;
+    margin-right: 10px;
+}
+
+.checkbox-group label {
+    margin-bottom: 0;
+}
+
+.submit-btn {
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    padding: 12px 30px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #5729e0;
+}
+
+.info-item {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.info-item i {
+    font-size: 24px;
+    color: var(--primary-color);
+    margin-right: 20px;
+    margin-top: 5px;
+}
+
+.info-item h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.map-section {
+    padding: 0 10% 60px;
+    text-align: center;
+}
+
+.map-container {
+    height: 400px;
+    background-color: var(--gray-color);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Make iframe fully fill the container */
+.map-iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .intro-content,
+    .mission-vision-values,
+    .founder,
+    .contact-content {
+        flex-direction: column;
+    }
+
+    .mission-section,
+    .vision-section,
+    .values-section {
+        margin-bottom: 30px;
+    }
+
+    .founder-image {
+        margin-bottom: 30px;
+    }
+
+    .contact-info {
+        margin-top: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .quote p {
+        font-size: 20px;
+    }
+}

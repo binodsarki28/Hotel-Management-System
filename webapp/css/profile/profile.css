@@ -1,0 +1,127 @@
+@charset "UTF-8";
+
+:root {
+    --primary-color: #cfc2fa;
+    --text-dark: #000;
+    --text-light: #666;
+    --background: #fff;
+    --border: #e0e0e0;
+    --card-radius: 16px;
+    --spacing: 20px;
+    --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-primary);
+    background-color: var(--background);
+    color: var(--text-dark);
+}
+
+.profile-container {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: var(--background);
+    border-radius: var(--card-radius);
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.profile-header {
+    background-color: var(--primary-color);
+    height: 160px;
+    position: relative;
+    text-align: center;
+}
+
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #fff;
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+}
+
+.user-info {
+    padding-top: 70px;
+    text-align: center;
+}
+
+.user-info h2 {
+    margin: 10px 0 5px;
+    font-size: 22px;
+}
+
+.user-info .info-pair {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 24px;
+    color: var(--text-light);
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.user-info .info-pair span:last-child {
+    color: var(--text-dark);
+}
+
+.profile-options {
+    margin-top: 30px;
+    border-top: 1px solid var(--border);
+}
+
+.profile-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing);
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.profile-option:hover {
+    background-color: #f9f9f9;
+}
+
+.profile-option i {
+    margin-right: 10px;
+    color: var(--text-light);
+}
+
+.toggle {
+    appearance: none;
+    width: 40px;
+    height: 20px;
+    background-color: #ccc;
+    border-radius: 20px;
+    position: relative;
+    outline: none;
+    cursor: pointer;
+}
+
+.toggle::before {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background-color: #fff;
+    border-radius: 50%;
+    top: 1px;
+    left: 1px;
+    transition: 0.3s;
+}
+
+.toggle:checked::before {
+    transform: translateX(20px);
+    background-color: #7242f5;
+}
+
+.logout {
+    color: red;
+}

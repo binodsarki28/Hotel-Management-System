@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+.title {
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    text-align: center;
+    padding: 60px 0;
+    margin-bottom: 40px;
+}
+
+.title h1 {
+    font-size: 42px;
+    margin-bottom: 0;
+}
