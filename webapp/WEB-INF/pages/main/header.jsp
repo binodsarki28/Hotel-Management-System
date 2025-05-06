@@ -24,14 +24,19 @@
                     <li><a class="active-link" href="${pageContext.request.contextPath}/aboutUs">About Us</a></li>
                     <li><a class="active-link" href="${pageContext.request.contextPath}/contactUs">Contact Us</a></li>
 
-                    <!-- Show login when user is NOT logged in -->
-                    <c:if test="${empty loggedInUser}">
+                    <!-- Show login when NO user or admin is logged in -->
+                    <c:if test="${empty loggedInUser and empty admin}">
                         <li><a class="active-link" href="${pageContext.request.contextPath}/login">Login</a></li>
                     </c:if>
 
-                    <!-- Show profile and logout when user IS logged in -->
+                    <!-- Show profile when user IS logged in -->
                     <c:if test="${not empty loggedInUser}">
                         <li><a class="active-link" href="${pageContext.request.contextPath}/profile">Profile</a></li>
+                    </c:if>
+
+                    <!-- Show admin dashboard when admin IS logged in -->
+                    <c:if test="${not empty admin}">
+                        <li><a class="active-link" href="${pageContext.request.contextPath}/dashboard">Admin Dashboard</a></li>
                     </c:if>
                 </ul>
             </nav>

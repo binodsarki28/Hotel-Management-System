@@ -20,7 +20,7 @@
             </div>
             <div class="room-card">
                 <img src="${pageContext.request.contextPath}/resources/room/2 sitter.jpg" alt="Room 2">
-                <h3>Couple Room</h3>
+                <h3>Double Room</h3>
                 <p>Enjoy you best time here while traveling</p>
             </div>
             <div class="room-card">
@@ -36,7 +36,7 @@
         </div>
 
         <div class="view-room">
-            <a href="${pageContext.request.contextPath}/pages/room/room.jsp">View All Room</a>
+            <a href="${pageContext.request.contextPath}/room">View All Room</a>
         </div>
     </div>
 </body>

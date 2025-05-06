@@ -39,7 +39,7 @@ public class AuthenticationFilter implements Filter {
             boolean isLoggedIn = SessionUtil.getAttribute(req, "loggedInUser") != null;
 
             // Allow static content like CSS, JS, Images
-            if (uri.endsWith(".css") || uri.endsWith(".js") || uri.contains("/resources/")) {
+            if (uri.endsWith(".css") || uri.contains("/resources/")) {
                 chain.doFilter(request, response);
                 return;
             }
