@@ -15,13 +15,13 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+// for providing the access to the page after user gets logged in 
 @WebFilter(asyncSupported = true, urlPatterns = { "/*" })
 public class AuthenticationFilter implements Filter {
 
     private static final String LOGIN = "/login";
     private static final String REGISTER = "/register";
     private static final String HOME = "/home";
-    private static final String PROFILE = "/profile";
     private static final String ROOT = "/";
     private static final String DASHBOARD = "/dashboard";
     private static final String LOGOUT = "/logout";
@@ -55,7 +55,8 @@ public class AuthenticationFilter implements Filter {
      // Public pages allowed without login
         if (!isLoggedIn && (uri.endsWith(LOGIN) || uri.endsWith(REGISTER) || uri.endsWith(HOME)
                 || uri.endsWith(LOGOUT) || uri.equals(req.getContextPath() + ROOT)
-                || uri.endsWith("/room") || uri.endsWith("/search") || uri.endsWith("/menu") || uri.endsWith("/aboutUs") || uri.endsWith("/contactUs"))) {
+                || uri.endsWith("/room") || uri.endsWith("/search") || uri.endsWith("/bookingHistory") || 
+                uri.endsWith("/menu") || uri.endsWith("/aboutUs") || uri.endsWith("/contactUs"))) {
             chain.doFilter(request, response);
             return;
         }

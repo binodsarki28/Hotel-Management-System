@@ -11,24 +11,12 @@ import java.util.List;
 import com.hms.model.RoomModel;
 import com.hms.service.RoomService;
 
-/**
- * Servlet implementation class RoomInfoController
- */
-@WebServlet(asyncSupported = true, urlPatterns = { "/dashboard/roomInfo"})
+//redirect to room info page for see room details
+@WebServlet(asyncSupported = true, urlPatterns = { "/dashboard/roomInfo" })
 public class RoomInfoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public RoomInfoController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	// this method redirect to the room info page with the list of rooms for fetching room details
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		RoomService roomService = new RoomService();
 		List<RoomModel> roomList = roomService.getAllRoomsInfo();
@@ -36,6 +24,5 @@ public class RoomInfoController extends HttpServlet {
 		req.setAttribute("roomList", roomList);
 		req.getRequestDispatcher("/WEB-INF/pages/admin/roomInfo.jsp").forward(req, resp);
 	}
-
 
 }

@@ -9,24 +9,20 @@ import java.io.IOException;
 
 import com.hms.service.DashboardService;
 
-/**
- * Servlet implementation class AdminDashboardController
- */
-@WebServlet(asyncSupported = true, urlPatterns = { "/dashboard"})
+// this page is redirecting admin to the dashboard page
+@WebServlet(asyncSupported = true, urlPatterns = { "/dashboard" })
 public class AdminDashboardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    private final DashboardService dashboardService = new DashboardService();
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("total", dashboardService.getTotalUsers());
-        req.setAttribute("room", dashboardService.getTotalRooms());
-        req.setAttribute("menu", dashboardService.getTotalMenus());
-        req.setAttribute("booking", dashboardService.getTotalBookings());
-        req.getRequestDispatcher("/WEB-INF/pages/admin/dashboard.jsp").forward(req, resp);
-    }
+	private final DashboardService dashboardService = new DashboardService(); // making object to call its methods
+
+	// redirect to dashboard page
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setAttribute("total", dashboardService.getTotalUsers()); // store the total user
+		req.setAttribute("room", dashboardService.getTotalRooms()); // store the total rooms
+		req.setAttribute("menu", dashboardService.getTotalMenus()); // store the total menus
+		req.setAttribute("booking", dashboardService.getTotalBookings()); // store the total bookings
+		req.getRequestDispatcher("/WEB-INF/pages/admin/dashboard.jsp").forward(req, resp);
+	}
 
 }

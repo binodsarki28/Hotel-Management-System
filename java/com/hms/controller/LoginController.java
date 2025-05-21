@@ -14,27 +14,28 @@ import com.hms.model.UserModel;
 import com.hms.util.CookiesUtil;
 import com.hms.util.SessionUtil;
 
+// for logging the user to the system
 @WebServlet(asyncSupported = true, urlPatterns = { "/login" })
 public class LoginController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    private ValidationUtil validationUtil;
-    private LoginService loginService;
+    private final ValidationUtil validationUtil = new ValidationUtil();
+    private final LoginService loginService = new LoginService();
 
-    @Override
-    public void init() throws ServletException {
-        this.validationUtil = new ValidationUtil();
-        this.loginService = new LoginService();
-    }
-
+    
+    // redirect to the login page
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/WEB-INF/pages/main/login.jsp").forward(req, resp);
     }
 
+    // this method handle the user details for logging the user securely
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String email = req.getParameter("email");
+       
+    	// takes email and password for login
+    	String email = req.getParameter("email");
         String password = req.getParameter("password");
 
+       
         if (!validationUtil.isNullOrEmpty(email) && !validationUtil.isNullOrEmpty(password)) {
 
             UserModel userModel = new UserModel(email, password);
@@ -47,12 +48,12 @@ public class LoginController extends HttpServlet {
                 if (fullUser != null) {
                     SessionUtil.setAttribute(req, "loggedInUser", fullUser);
 
-                    if (email.equals("admin@gmail.com")) {
-                        CookiesUtil.addCookie(resp, "role", "admin", 5 * 60 * 24);
-                        resp.sendRedirect(req.getContextPath() + "/dashboard");
-                    } else {
-                        CookiesUtil.addCookie(resp, "role", "user", 5 * 60 * 24);
-                        resp.sendRedirect(req.getContextPath() + "/home");
+                    if (email.equals("admin@gmail.com")) { // check for amdin login 
+                        CookiesUtil.addCookie(resp, "role", "admin", 5 * 60); //for 5 hours
+                        resp.sendRedirect(req.getContextPath() + "/dashboard");// redirect to dashboard page
+                    } else { //else user gets login 
+                        CookiesUtil.addCookie(resp, "role", "user", 5 * 60);
+                        resp.sendRedirect(req.getContextPath() + "/home"); // redirect to home page
                     }
                 } else {
                     req.setAttribute("error", "Could not retrieve user details. Please try again.");
@@ -69,6 +70,7 @@ public class LoginController extends HttpServlet {
         }
     }
 
+    // handle the message after login gets failed
     private void handleLoginFailure(HttpServletRequest req, HttpServletResponse resp, Boolean loginStatus)
             throws ServletException, IOException {
         String errorMessage;

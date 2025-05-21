@@ -26,6 +26,7 @@ public class DashboardService {
 		}
 	}
 	
+	// gets total no of users
 	public String getTotalUsers() {
 		if (isConnectionError) {
 			return null;
@@ -46,6 +47,7 @@ public class DashboardService {
 		}
 	}
 	
+	// gets total no of rooms
 	public String getTotalRooms() {
 		if (isConnectionError) {
 			return null;
@@ -66,6 +68,7 @@ public class DashboardService {
 		}
 	}
 	
+	// gets total no of menus
 	public String getTotalMenus() {
 		if (isConnectionError) {
 			return null;
@@ -86,6 +89,7 @@ public class DashboardService {
 		}
 	}
 	
+	// gets total no of bookings
 	public String getTotalBookings() {
 		if (isConnectionError) {
 			return null;

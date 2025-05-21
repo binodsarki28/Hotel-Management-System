@@ -26,6 +26,7 @@ public class BookingService {
 		}
 	}
 	
+	// get list of all booking
 	public List<BookingModel> getAllBookings() {
 	    List<BookingModel> bookings = new ArrayList<>();
 
@@ -56,6 +57,7 @@ public class BookingService {
 	    return bookings;
 	}
 	
+	// for adding booking to the database
 	public Boolean addBooking(BookingModel bookingModel) {
 		 if (dbConn == null) {
 		        System.err.println("Database connection is not available.");
@@ -85,6 +87,7 @@ public class BookingService {
 		    }
 		}
 	
+	// fetch booking by particular id
 	public BookingModel getBookingById(int bookingId) {
         BookingModel booking = null;
         if (dbConn == null) {

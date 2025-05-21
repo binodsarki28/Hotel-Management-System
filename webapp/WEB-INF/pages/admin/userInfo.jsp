@@ -25,7 +25,7 @@
 			<p class="success-message">${success}</p>
 		</c:if>
 
-		<h3>Room List</h3>
+		<h3>User List</h3>
 		<table>
 			<thead>
 				<tr>
@@ -52,7 +52,7 @@
 								<input type="hidden" name="userId" value="${user.userId}">
 								<input type="hidden" name="action" value="delete">
 								<button class="action-btn" type="submit"
-									onclick="return confirm('Are you sure you want to delete this this?');">Delete</button>
+									onclick="return confirm('Are you sure you want to delete this user?');">Delete</button>
 							</form>
 						</td>
 					</tr>

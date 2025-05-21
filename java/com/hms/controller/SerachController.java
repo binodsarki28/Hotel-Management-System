@@ -12,9 +12,7 @@ import java.util.List;
 import com.hms.service.AddRoomService;
 import com.hms.model.RoomModel;
 
-/**
- * Servlet implementation class SerachController
- */
+// for searching the room 
 @WebServlet(asyncSupported = true, urlPatterns = { "/search" })
 public class SerachController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -28,24 +26,21 @@ public class SerachController extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	// run after the user click on search button and fetch the room after filtering 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String category = request.getParameter("category");
-        String checkin = request.getParameter("checkin");   // You have these inputs on the form
+        String checkin = request.getParameter("checkin");
         String checkout = request.getParameter("checkout");
 
-        List<RoomModel> allRooms = roomService.getAllRooms();
+        List<RoomModel> allRooms = roomService.getAllRooms(); 
         List<RoomModel> filteredRooms = new ArrayList<>();
 
         for (RoomModel room : allRooms) {
-            boolean matchCategory = (category == null || category.isEmpty()) || category.equalsIgnoreCase(room.getRoomType());
-            // You might want to consider "Available" status here or not, based on your logic:
-            // boolean isAvailable = "Available".equalsIgnoreCase(room.getStatus());
+            boolean matchCategory = (category == null || category.isEmpty()) || category.equalsIgnoreCase(room.getRoomType()); // store the room according to the user room type
+            boolean isAvailable = room.getStatus() != null && room.getStatus().equalsIgnoreCase("Available"); // store the room which are available
 
-            // If you want to show only available rooms on initial load and when filtering:
-            if (matchCategory /* && isAvailable */) {
+            // Only add to filtered list if status is "Available"
+            if (matchCategory && isAvailable) {
                 filteredRooms.add(room);
             }
         }
@@ -60,15 +55,4 @@ public class SerachController extends HttpServlet {
 
         request.getRequestDispatcher("/WEB-INF/pages/room/room.jsp").forward(request, response);
     }
-
-
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }

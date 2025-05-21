@@ -73,6 +73,7 @@ public class LoginService {
 				&& PasswordUtil.decrypt(dbPassword, dbEmail).equals(userModel.getPassword());
 	}
 	
+	// gets user details by the email
 	public UserModel getUserDetailsByEmail(String email) {
 	    if (isConnectionError) {
 	        System.out.println("Connection Error!");

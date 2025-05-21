@@ -14,10 +14,12 @@ import com.hms.service.UserService;
 import java.io.IOException;
 import java.util.List;
 
+// for handling the profile page
 @WebServlet(asyncSupported = true, urlPatterns = { "/profile" })
 public class ProfileController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
+    // redirect to the profile page if user is logged in 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
 
@@ -28,13 +30,6 @@ public class ProfileController extends HttpServlet {
 
         UserModel loggedInUser = (UserModel) session.getAttribute("loggedInUser");
         req.setAttribute("loggedInUser", loggedInUser);
-
-        // Fetch booking list using UserService
-        UserService userService = new UserService();
-        List<BookingModel> bookingList = userService.getBookingsByUserId(loggedInUser.getUserId());
-
-        // Set booking list in request
-        req.setAttribute("bookings", bookingList);
 
         // Forward to profile.jsp
         req.getRequestDispatcher("/WEB-INF/pages/profile/profile.jsp").forward(req, resp);

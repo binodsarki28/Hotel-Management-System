@@ -8,7 +8,7 @@ import com.hms.config.DbConfig;
 import com.hms.model.UserModel;
 
 public class RegisterService {
-	
+
 	private Connection dbConn;
 
 	/**
@@ -23,39 +23,34 @@ public class RegisterService {
 		}
 	}
 
-	/**
-	 * Registers a new student in the database.
-	 *
-	 * @param studentModel the student details to be registered
-	 * @return Boolean indicating the success of the operation
-	 */
+	// Registers a new user in the database.
 	public Boolean addUser(UserModel userModel) {
-	    if (dbConn == null) {
-	        System.err.println("Database connection is not available.");
-	        return null;
-	    }
+		if (dbConn == null) {
+			System.err.println("Database connection is not available.");
+			return null;
+		}
 
-	    String insertQuery = "INSERT INTO user (full_name, email, phone_number, gender, password, profile_photo, role) "
-	            + "VALUES (?, ?, ?, ?, ?, ?, ?)"; // Notice the correct number of placeholders
+		String insertQuery = "INSERT INTO user (full_name, email, phone_number, gender, password, profile_photo, role) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?)"; // Notice the correct number of placeholders
 
-	    try {
-	        PreparedStatement insertStmt = dbConn.prepareStatement(insertQuery);
-	        
-	        insertStmt.setString(1, userModel.getFullName());
-	        insertStmt.setString(2, userModel.getEmail());
-	        insertStmt.setString(3, userModel.getPhoneNumber());
-	        insertStmt.setString(4, userModel.getGender());
-	        insertStmt.setString(5, userModel.getPassword());
-	        insertStmt.setString(6, userModel.getProfilePhoto());
-	        insertStmt.setString(7, "USER");
-	  
-	        // Execute the update and return true if successful
-	        return insertStmt.executeUpdate() > 0;
-	    } catch (SQLException e) {
-	        System.err.println("Error during student registration: " + e.getMessage());
-	        e.printStackTrace();
-	        return false; // Return false if an error occurs
-	    }
+		try {
+			PreparedStatement insertStmt = dbConn.prepareStatement(insertQuery);
+
+			insertStmt.setString(1, userModel.getFullName());
+			insertStmt.setString(2, userModel.getEmail());
+			insertStmt.setString(3, userModel.getPhoneNumber());
+			insertStmt.setString(4, userModel.getGender());
+			insertStmt.setString(5, userModel.getPassword());
+			insertStmt.setString(6, userModel.getProfilePhoto());
+			insertStmt.setString(7, "USER");
+
+			// Execute the update and return true if successful
+			return insertStmt.executeUpdate() > 0;
+		} catch (SQLException e) {
+			System.err.println("Error during student registration: " + e.getMessage());
+			e.printStackTrace();
+			return false; // Return false if an error occurs
+		}
 	}
 
 }

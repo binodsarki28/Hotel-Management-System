@@ -11,32 +11,18 @@ import java.util.List;
 import com.hms.model.MenuModel;
 import com.hms.service.MenuService;
 
-/**
- * Servlet implementation class MenuInfoController
- */
+//redirect to menu info page for see menu details
 @WebServlet(asyncSupported = true, urlPatterns = { "/dashboard/menuInfo"})
 public class MenuInfoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public MenuInfoController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	// this method redirect to the menu info page with the list of menus for fetching menu details 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		MenuService menuService = new MenuService();
 		List<MenuModel> menuList = menuService.getAllMenuInfo();
 
 		req.setAttribute("menuList", menuList);
 		req.getRequestDispatcher("/WEB-INF/pages/admin/menuInfo.jsp").forward(req, resp);
-	}
-
-	
+	}	
 
 }

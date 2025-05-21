@@ -26,7 +26,7 @@
 		</c:if>
 
 		<div class="form-container">
-			<form action="${pageContext.request.contextPath}/addRoom"
+			<form action="${pageContext.request.contextPath}/dashboard/addRoom"
 				method="post" enctype="multipart/form-data">
 				<div class="form-row">
 					<div class="form-field">

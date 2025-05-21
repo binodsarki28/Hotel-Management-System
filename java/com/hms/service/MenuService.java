@@ -60,6 +60,7 @@ public class MenuService {
         }
     }
     
+    // get menu by its id 
     public MenuModel getMenuById(int id) {
         String query = "SELECT menu_id, food_name, category, food_description, menu_price, menu_photo FROM menu WHERE menu_id = ?";
         try (
@@ -84,7 +85,7 @@ public class MenuService {
         return null;
     }
     
-    
+    // delete menu by its id
     public Boolean deleteMenuById(int menuId) {
     	if (isConnectionError) {
             System.out.println("Connection Error!");

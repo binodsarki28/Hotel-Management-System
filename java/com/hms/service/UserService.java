@@ -30,6 +30,7 @@ public class UserService {
         }
     }
     
+    // gets all user information and store it on the list
     public List<UserModel> getAllUserInfo() {
         if (isConnectionError) {
             System.out.println("Connection Error!");
@@ -61,6 +62,7 @@ public class UserService {
         }
     }
     
+    // delete user by its id
     public Boolean deleteUserById(int userId) {
     	if (isConnectionError) {
             System.out.println("Connection Error!");
@@ -77,6 +79,7 @@ public class UserService {
         }
     }
 
+    // get booking by its user id
     public List<BookingModel> getBookingsByUserId(int userId) {
         List<BookingModel> bookings = new ArrayList<>();
 
@@ -110,6 +113,7 @@ public class UserService {
         return bookings;
     }
     
+    // update the booking status
     public boolean updateBookingStatus(int bookingId, String newStatus) {
 	    String sql = "UPDATE booking SET status = ? WHERE booking_id = ?";
 	    try (PreparedStatement stmt = dbConn.prepareStatement(sql)) {
@@ -123,6 +127,7 @@ public class UserService {
 	    }
 	}
     
+    // get booking by its id
     public BookingModel getBookingById(int bookingId) {
         BookingModel booking = null;
         String query = "SELECT * FROM booking WHERE booking_id = ?";

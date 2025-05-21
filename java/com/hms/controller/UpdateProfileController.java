@@ -12,18 +12,19 @@ import java.io.IOException;
 import com.hms.model.UserModel;
 import com.hms.service.UpdateProfileService;
 
+// for updating the user profile
 @WebServlet(asyncSupported = true, urlPatterns = { "/updateProfile"})
 public class UpdateProfileController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     private final UpdateProfileService updateProfileService = new UpdateProfileService();
     
+    // redirect to the update profile page
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.getRequestDispatcher("/WEB-INF/pages/profile/updateProfile.jsp").forward(req, resp);
 	}
 
-
-    @Override
+    // gets the value which is entered by user and update it
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
         if (session == null || session.getAttribute("loggedInUser") == null) {

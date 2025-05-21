@@ -8,9 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-/**
- * Servlet implementation class HomeController
- */
+// redirect to the home page 
 @WebServlet(asyncSupported = true, urlPatterns = { "/home", "/" })
 public class HomeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;

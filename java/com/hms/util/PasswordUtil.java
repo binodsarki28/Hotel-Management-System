@@ -89,6 +89,7 @@ public class PasswordUtil {
 
 	}
 
+	// for decrypting password
 	public static String decrypt(String encryptedPassword, String username) {
 		try {
 			byte[] decode = Base64.getDecoder().decode(encryptedPassword.getBytes(UTF_8));

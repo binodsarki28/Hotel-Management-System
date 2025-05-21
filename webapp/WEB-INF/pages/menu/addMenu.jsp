@@ -26,7 +26,7 @@
 		</c:if>
 
 		<div class="form-container">
-			<form action="${pageContext.request.contextPath}/addMenu"
+			<form action="${pageContext.request.contextPath}/dashboard/addMenu"
 				method="post" enctype="multipart/form-data">
 				<div class="form-row">
 					<div class="form-field">

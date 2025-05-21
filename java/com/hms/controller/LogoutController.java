@@ -38,10 +38,13 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/logout")
+
+// for logging out the user
+@WebServlet(asyncSupported = true, urlPatterns = { "/logout" })
 public class LogoutController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
+    // delete the cookies stored after the logout
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Invalidate session
         SessionUtil.removeAttribute(req, "loggedInUser");
@@ -55,6 +58,6 @@ public class LogoutController extends HttpServlet {
         }
 
         // Redirect to login page
-        resp.sendRedirect(req.getContextPath() + "/login");
+        resp.sendRedirect(req.getContextPath() + "/login"); // redirect to login page after logout
     }
 }

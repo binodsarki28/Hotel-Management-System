@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+// This class set up the connection between the local mysql database and servlet class
 public class DbConfig {
 	
 	// Database configuration information

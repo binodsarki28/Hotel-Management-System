@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+// for checking out after booking
 @WebServlet(asyncSupported = true, urlPatterns = { "/checkout"})
 public class CheckOutController extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -20,7 +21,7 @@ public class CheckOutController extends HttpServlet {
     private final UserService userService = new UserService();
     private final RoomService roomService = new RoomService();
 
-    @Override
+    // change the value after check out
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -32,15 +33,15 @@ public class CheckOutController extends HttpServlet {
 
             if (booking == null) {
                 request.setAttribute("error", "Booking not found.");
-                request.getRequestDispatcher("/profile").forward(request, response);
+                request.getRequestDispatcher("/bookingHistory").forward(request, response);
                 return;
             }
 
             // Update booking status to "Checked Out"
-            boolean bookingUpdated = userService.updateBookingStatus(bookingId, "Checked Out");
+            boolean bookingUpdated = userService.updateBookingStatus(bookingId, "Checked Out"); // update the booking to the check out 
 
             // Update room status to "Available"
-            boolean roomUpdated = roomService.updateRoomStatus(booking.getRoomId(), "Available");
+            boolean roomUpdated = roomService.updateRoomStatus(booking.getRoomId(), "Available"); // update the room status to Available
 
             if (bookingUpdated && roomUpdated) {
                 request.setAttribute("message", "Checkout successful. Thank you!");

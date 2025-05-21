@@ -15,18 +15,21 @@ import java.io.IOException;
 import java.sql.Date;
 import java.time.temporal.ChronoUnit;
 
+// this servlet class control the booking function of the system
 @WebServlet(asyncSupported = true, urlPatterns = { "/booking"})
 public class BookingController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
+    // making objects
     private final BookingService bookingService = new BookingService();
     private final RoomService roomService = new RoomService();
     
+    // redirect to booking page
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.getRequestDispatcher("/WEB-INF/pages/room/booking.jsp").forward(req, resp);
 	}
 
-    @Override
+    // get the necessary details from the client side to make successful booking
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -39,7 +42,8 @@ public class BookingController extends HttpServlet {
             Date checkin = Date.valueOf(request.getParameter("checkin"));
             Date checkout = Date.valueOf(request.getParameter("checkout"));
 
-            long days = ChronoUnit.DAYS.between(checkin.toLocalDate(), checkout.toLocalDate());
+            // logic of calculating the no of days between the check in date and check out date 
+            long days = ChronoUnit.DAYS.between(checkin.toLocalDate(), checkout.toLocalDate()); //  ChronoUnit calculate the number of days between two local dates
             if (days <= 0) {
                 request.setAttribute("error", "Check-out must be after check-in.");
                 request.getRequestDispatcher("/WEB-INF/pages/room/booking.jsp").forward(request, response);
@@ -60,10 +64,10 @@ public class BookingController extends HttpServlet {
             booking.setTotalAmount(totalAmount);
             booking.setStatus(status);
 
-            boolean success = bookingService.addBooking(booking);
+            boolean success = bookingService.addBooking(booking); // add booking to the database
             if (success) {
                 // Update room status to "Not Available"
-                boolean roomUpdateSuccess = roomService.updateRoomStatus(roomId, "Not Available");
+                boolean roomUpdateSuccess = roomService.updateRoomStatus(roomId, "Not Available"); // after booking room status is changed to the Not Available
                 if (!roomUpdateSuccess) {
                     System.out.println("Failed to update room status.");
                     // Optionally, handle this failure gracefully

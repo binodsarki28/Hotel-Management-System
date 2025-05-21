@@ -29,7 +29,6 @@
 
     <!-- Make sure user data is available -->
     <c:if test="${not empty loggedInUser}">
-        <p style="text-align:center; color: gray;">[Debug] User ID: ${loggedInUser.userId}</p>
 
         <div class="form-container">
             <form action="${pageContext.request.contextPath}/updateProfile"

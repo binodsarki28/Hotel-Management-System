@@ -23,6 +23,7 @@ public class UpdateProfileService {
 		}
 	}
 	
+	// for updating the user profile
 	public boolean updateUserProfile(UserModel user) {
 	    String sql = "UPDATE user SET full_name = ?, email = ?, phone_number = ?, gender = ?, password = ?, profile_photo = ? WHERE user_id = ?";
 

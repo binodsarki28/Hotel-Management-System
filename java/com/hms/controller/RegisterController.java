@@ -16,6 +16,7 @@ import com.hms.util.ImageUtil;
 import com.hms.util.PasswordUtil;
 import com.hms.util.ValidationUtil;
 
+// for registering the user to the system
 @WebServlet(asyncSupported = true, urlPatterns = { "/register" })
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
 	maxFileSize = 1024 * 1024 * 10, // 10MB
@@ -26,17 +27,17 @@ public class RegisterController extends HttpServlet {
 	private final RegisterService registerService = new RegisterService();
 	private final ImageUtil imageUtil = new ImageUtil();
 
-	@Override
+	// redirect to the register page
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.getRequestDispatcher("/WEB-INF/pages/main/register.jsp").forward(req, resp);
 	}
 
-	@Override
+	// this method takes the details entered by user from client side and store it to the database through the registerServie class
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			String validationMessage = validateRegistrationForm(req);
-			if (validationMessage != null) {
-				handleError(req, resp, validationMessage);
+			String validationMessage = validateRegistrationForm(req); // check for validation error 
+			if (validationMessage != null) {  // if error 
+				handleError(req, resp, validationMessage); // send suitable error message
 				return;
 			}
 			UserModel userModel = extractUserModel(req, resp);
@@ -59,6 +60,7 @@ public class RegisterController extends HttpServlet {
 		}
 	}
 
+	// takes all user inputed values
 	private String validateRegistrationForm(HttpServletRequest req) {
 		String fullName = req.getParameter("fullName");
 		String email = req.getParameter("email");
@@ -67,6 +69,7 @@ public class RegisterController extends HttpServlet {
 		String retypePassword = req.getParameter("retypePassword");
 		
 
+		// checks for the validation
 		if (!ValidationUtil.isValidFullName(fullName)) {
 			return "Full name must be at least 6 characters long and contain only letters and spaces.";
 		}
@@ -85,6 +88,7 @@ public class RegisterController extends HttpServlet {
 		return null;
 	}
 
+	// gets values from the user
 	private UserModel extractUserModel(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		String fullName = req.getParameter("fullName");
 		String email = req.getParameter("email");
@@ -93,9 +97,9 @@ public class RegisterController extends HttpServlet {
 		String password = req.getParameter("password");
 		String role = req.getParameter("role");
 
-		password = PasswordUtil.encrypt(email, password);
+		password = PasswordUtil.encrypt(email, password); // encrypt the password gets from user for security 
 		
-		Part image = req.getPart("profilePhoto");
+		Part image = req.getPart("profilePhoto"); // get picture 
 		String profilePhoto = imageUtil.getImageNameFromPart(image);
 
 		return new UserModel(fullName, email, phoneNumber, gender, password, profilePhoto, role);

@@ -29,6 +29,7 @@ public class RoomService {
         }
     }
     
+    // get all room and store it in a list
     public List<RoomModel> getAllRoomsInfo() {
         if (isConnectionError) {
             System.out.println("Connection Error!");
@@ -61,6 +62,7 @@ public class RoomService {
         }
     }
     
+    // get room by id 
     public RoomModel getRoomById(int roomId) {
     	
     	if (isConnectionError) {
@@ -92,6 +94,7 @@ public class RoomService {
         return room;
     }
     
+    // delete room by its id
     public Boolean deleteRoomById(int roomId) {
     	if (isConnectionError) {
             System.out.println("Connection Error!");
@@ -108,6 +111,7 @@ public class RoomService {
         }
     }
     
+    // update room status 
     public boolean updateRoomStatus(int roomId, String newStatus) {
         String query = "UPDATE room SET status = ? WHERE room_id = ?";
         try (PreparedStatement stmt = dbConn.prepareStatement(query)) {

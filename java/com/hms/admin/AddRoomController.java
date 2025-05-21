@@ -14,30 +14,24 @@ import com.hms.model.RoomModel;
 import com.hms.service.AddRoomService;
 import com.hms.util.ImageUtil;
 
-/**
- * Servlet implementation class RoomController
- */
-@WebServlet(asyncSupported = true, urlPatterns = { "/dashboard/addRoom"})
+//This servlet class is adding the room to the database by doPost method at first it takes the value from addRoom
+//jsp file and store it to the room table from roomService class
+@WebServlet(asyncSupported = true, urlPatterns = { "/dashboard/addRoom" })
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
-	maxFileSize = 1024 * 1024 * 10, // 10MB
-	maxRequestSize = 1024 * 1024 * 50) // 50MB
+		maxFileSize = 1024 * 1024 * 10, // 10MB
+		maxRequestSize = 1024 * 1024 * 50) // 50MB
 public class AddRoomController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	private final AddRoomService addRoomService = new AddRoomService();
 	private final ImageUtil imageUtil = new ImageUtil();
-	
-	
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+
+	// this method redirect the admin to the add room page
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.getRequestDispatcher("/WEB-INF/pages/room/addRoom.jsp").forward(req, resp);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	// this method is add the room to the database
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			RoomModel roomModel = extractRoomModel(req, resp);
@@ -60,26 +54,25 @@ public class AddRoomController extends HttpServlet {
 		}
 	}
 
-
+	// extract the room data from the jsp fil
 	private RoomModel extractRoomModel(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-		int roomNo  = Integer.parseInt(req.getParameter("roomNo")); 
+		int roomNo = Integer.parseInt(req.getParameter("roomNo"));
 		String roomType = req.getParameter("roomType");
 		String roomDescription = req.getParameter("roomDescription");
 		float pricePerDay = Float.parseFloat(req.getParameter("pricePerDay"));
 		String status = req.getParameter("status");
-		
+
 		Part image = req.getPart("roomPhoto");
 		String roomPhoto = imageUtil.getImageNameFromPart(image);
 
-		return new RoomModel(roomNo, roomType, roomDescription, pricePerDay, status,
-				roomPhoto);
+		return new RoomModel(roomNo, roomType, roomDescription, pricePerDay, status, roomPhoto);
 	}
 
 	private boolean uploadImage(HttpServletRequest req) throws IOException, ServletException {
 		Part image = req.getPart("roomPhoto");
 		return imageUtil.uploadImage(image, req.getServletContext().getRealPath("/"), "uploads");
 	}
-	
+
 	private void handleSuccess(HttpServletRequest req, HttpServletResponse resp, String message, String redirectPage)
 			throws ServletException, IOException {
 		req.setAttribute("success", message);
