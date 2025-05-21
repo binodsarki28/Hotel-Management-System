@@ -13,18 +13,27 @@ public class MenuModel {
 	
 	}
 	
-	public MenuModel(int menuId, String foodName, String category, String foodDescription, float menuPrice,
-			String menuPhoto) {
+	public MenuModel(int menuId, String foodName, String category, String foodDescription, float menuPrice) {
 		super();
 		this.menuId = menuId;
 		this.foodName = foodName;
 		this.category = category;
 		this.foodDescription = foodDescription;
 		this.menuPrice = menuPrice;
-		this.menuPhoto = menuPhoto;
 	}
 	public MenuModel(String foodName, String category, String foodDescription, float menuPrice, String menuPhoto) {
 		super();
+		this.foodName = foodName;
+		this.category = category;
+		this.foodDescription = foodDescription;
+		this.menuPrice = menuPrice;
+		this.menuPhoto = menuPhoto;
+	}
+	
+
+	public MenuModel(int menuId, String foodName, String category, String foodDescription, float menuPrice, String menuPhoto) {
+		super();
+		this.menuId = menuId;
 		this.foodName = foodName;
 		this.category = category;
 		this.foodDescription = foodDescription;

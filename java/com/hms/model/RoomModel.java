@@ -15,13 +15,14 @@ public class RoomModel {
 		
 	}
 
-	public RoomModel(int roomId, int roomNo, String roomType, String roomDescription, float pricePerDay) {
+	public RoomModel(int roomId, int roomNo, String roomType, String roomDescription, float pricePerDay, String status) {
 		super();
 		this.roomId = roomId;
 		this.roomNo = roomNo;
 		this.roomType = roomType;
 		this.roomDescription = roomDescription;
 		this.pricePerDay = pricePerDay;
+		this.status = status;
 	}
 	
 	public RoomModel(int roomNo, String roomType, String roomDescription, float pricePerDay, String status,
@@ -34,8 +35,19 @@ public class RoomModel {
 		this.status = status;
 		this.roomPhoto = roomPhoto;
 	}
-
 	
+
+	public RoomModel(int roomId, int roomNo, String roomType, String roomDescription, float pricePerDay, String status,
+			String roomPhoto) {
+		super();
+		this.roomId = roomId;
+		this.roomNo = roomNo;
+		this.roomType = roomType;
+		this.roomDescription = roomDescription;
+		this.pricePerDay = pricePerDay;
+		this.status = status;
+		this.roomPhoto = roomPhoto;
+	}
 
 	public int getRoomId() {
 		return roomId;

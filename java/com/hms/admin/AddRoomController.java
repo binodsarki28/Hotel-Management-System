@@ -17,7 +17,7 @@ import com.hms.util.ImageUtil;
 /**
  * Servlet implementation class RoomController
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/addRoom"})
+@WebServlet(asyncSupported = true, urlPatterns = { "/dashboard/addRoom"})
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
 	maxFileSize = 1024 * 1024 * 10, // 10MB
 	maxRequestSize = 1024 * 1024 * 50) // 50MB
@@ -47,7 +47,7 @@ public class AddRoomController extends HttpServlet {
 				handleError(req, resp, "Our server is under maintenance. Please try again later!");
 			} else if (isAdded) {
 				if (uploadImage(req)) {
-					handleSuccess(req, resp, "Room Added Successfully", "/WEB-INF/pages/login.jsp");
+					handleSuccess(req, resp, "Room Added Successfully", "/WEB-INF/pages/admin/dashboard.jsp");
 				} else {
 					handleError(req, resp, "Could not upload the image. Please try again later!");
 				}

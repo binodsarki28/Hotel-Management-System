@@ -1,23 +1,30 @@
 package com.hms.controller;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 
 import java.io.IOException;
 
 import com.hms.model.UserModel;
 import com.hms.service.RegisterService;
+import com.hms.util.ImageUtil;
 import com.hms.util.PasswordUtil;
 import com.hms.util.ValidationUtil;
 
 @WebServlet(asyncSupported = true, urlPatterns = { "/register" })
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+	maxFileSize = 1024 * 1024 * 10, // 10MB
+	maxRequestSize = 1024 * 1024 * 50) // 50MB
 public class RegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private final RegisterService registerService = new RegisterService();
+	private final ImageUtil imageUtil = new ImageUtil();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,20 +39,23 @@ public class RegisterController extends HttpServlet {
 				handleError(req, resp, validationMessage);
 				return;
 			}
-
 			UserModel userModel = extractUserModel(req, resp);
 			Boolean isAdded = registerService.addUser(userModel);
 
 			if (isAdded == null) {
 				handleError(req, resp, "Our server is under maintenance. Please try again later!");
 			} else if (isAdded) {
-				handleSuccess(req, resp, "Your account is successfully created!", "/WEB-INF/pages/main/login.jsp");
+				if (uploadImage(req)) {
+					handleSuccess(req, resp, "User Added Successfully", "/WEB-INF/pages/main/login.jsp");
+				} else {
+					handleError(req, resp, "Could not upload the image. Please try again later!");
+				}
 			} else {
-				handleError(req, resp, "Email or phone number already exists. Please use a different one.");
+				handleError(req, resp, "Could not add the user. Please try again later!");
 			}
 		} catch (Exception e) {
 			handleError(req, resp, "An unexpected error occurred. Please try again later!");
-			e.printStackTrace();
+			e.printStackTrace(); // Log the exception
 		}
 	}
 
@@ -55,6 +65,7 @@ public class RegisterController extends HttpServlet {
 		String phoneNumber = req.getParameter("phoneNumber");
 		String password = req.getParameter("password");
 		String retypePassword = req.getParameter("retypePassword");
+		
 
 		if (!ValidationUtil.isValidFullName(fullName)) {
 			return "Full name must be at least 6 characters long and contain only letters and spaces.";
@@ -83,9 +94,18 @@ public class RegisterController extends HttpServlet {
 		String role = req.getParameter("role");
 
 		password = PasswordUtil.encrypt(email, password);
+		
+		Part image = req.getPart("profilePhoto");
+		String profilePhoto = imageUtil.getImageNameFromPart(image);
 
-		return new UserModel(fullName, email, phoneNumber, gender, password, role);
+		return new UserModel(fullName, email, phoneNumber, gender, password, profilePhoto, role);
 	}
+	
+	private boolean uploadImage(HttpServletRequest req) throws IOException, ServletException {
+		Part image = req.getPart("profilePhoto");
+		return imageUtil.uploadImage(image, req.getServletContext().getRealPath("/"), "uploads");
+	}
+
 
 	private void handleSuccess(HttpServletRequest req, HttpServletResponse resp, String message, String redirectPage)
 			throws ServletException, IOException {

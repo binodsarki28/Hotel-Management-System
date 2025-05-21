@@ -36,7 +36,7 @@ public class RoomService {
         }
 
         // SQL query to fetch room details
-        String query = "SELECT room_id, room_no, room_type, room_description, price_per_day FROM room";
+        String query = "SELECT room_id, room_no, room_type, room_description, price_per_day, status FROM room";
         try (PreparedStatement stmt = dbConn.prepareStatement(query)) {
             ResultSet result = stmt.executeQuery();
             List<RoomModel> roomList = new ArrayList<>();
@@ -48,7 +48,8 @@ public class RoomService {
                         result.getInt("room_no"), 
                         result.getString("room_type"), 
                         result.getString("room_description"), 
-                        result.getFloat("price_per_day")
+                        result.getFloat("price_per_day"),
+                        result.getString("status")
                 ));
             }
 
@@ -59,5 +60,67 @@ public class RoomService {
             return null;
         }
     }
+    
+    public RoomModel getRoomById(int roomId) {
+    	
+    	if (isConnectionError) {
+            System.out.println("Connection Error!");
+            return null;
+        }
+        RoomModel room = null;
+        String query = "SELECT * FROM room WHERE room_id = ?";
+        
+        try (PreparedStatement stmt = dbConn.prepareStatement(query)) {
+            
+            stmt.setInt(1, roomId);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                room = new RoomModel();
+                room.setRoomId(rs.getInt("room_id"));
+                room.setRoomNo(rs.getInt("room_no"));
+                room.setRoomType(rs.getString("room_type"));
+                room.setRoomDescription(rs.getString("room_description"));
+                room.setPricePerDay(rs.getFloat("price_per_day"));
+                room.setStatus(rs.getString("status"));
+                room.setRoomPhoto(rs.getString("room_photo")); // Adjust field names if needed
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return room;
+    }
+    
+    public Boolean deleteRoomById(int roomId) {
+    	if (isConnectionError) {
+            System.out.println("Connection Error!");
+            return null;
+        }
+        String sql = "DELETE FROM room WHERE room_id = ?";
+        try (PreparedStatement stmt = dbConn.prepareStatement(sql)) {
+            stmt.setInt(1, roomId);
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean updateRoomStatus(int roomId, String newStatus) {
+        String query = "UPDATE room SET status = ? WHERE room_id = ?";
+        try (PreparedStatement stmt = dbConn.prepareStatement(query)) {
+            stmt.setString(1, newStatus);
+            stmt.setInt(2, roomId);
+            int rowsUpdated = stmt.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
 }
 

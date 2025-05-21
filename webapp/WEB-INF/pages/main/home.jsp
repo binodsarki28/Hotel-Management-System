@@ -5,9 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Home Page</title>
-<link rel="stylesheet" type="text/css" href="styles.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/main/home.css" />
 </head>
-<body style="background: url('${pageContext.request.contextPath}/resources/room/Hotel.jpg') no-repeat center center fixed; background-size: cover;">
+<body> 
 	<jsp:include page="header.jsp" />
 
 	<br><br>

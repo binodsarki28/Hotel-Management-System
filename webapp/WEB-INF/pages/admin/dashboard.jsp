@@ -19,17 +19,28 @@
 			<ul class="nav">
 				<li><a href="${contextPath}/dashboard"><span class="icon">🏠</span>
 						Dashboard</a></li>
-				<li><a href="${contextPath}/userInfo"><span class="icon">👤</span>
-						User Info</a></li>
-				<li><a href="${contextPath}/roomInfo"><span class="icon">🛏️</span>
-						Room Info</a></li>
-				<li><a href="${contextPath}/menuInfo"><span class="icon">🍽️</span>
-						Menu Info</a></li>
+				<li><a href="${contextPath}/dashboard/userInfo"><span
+						class="icon">👤</span> User Info</a></li>
+				<li><a href="${contextPath}/dashboard/roomInfo"><span
+						class="icon">🛏️</span> Room Info</a></li>
+				<li><a href="${contextPath}/dashboard/menuInfo"><span
+						class="icon">🍽️</span> Menu Info</a></li>
+				<li><a href="${contextPath}/dashboard/bookingInfo"><span
+						class="icon">🍽️</span> Booking Info</a></li>
+				<li><a href="${contextPath}/dashboard/addRoom"><span
+						class="icon">🍽️</span> Add Room</a>
+				<li>
+				<li><a href="${contextPath}/dashboard/addMenu"><span
+						class="icon">🍽️</span> Add Menu</a>
+				<li>
 			</ul>
 			<div class="logout">
-				<form action="${contextPath}/logout" method="post">
-					<input type="submit" class="nav-button" value="Logout" />
+				<form action="${pageContext.request.contextPath}/logout"
+					method="post">
+					<button type="submit" onclick="return confirm('Are you sure you want to logout?');">Logout</button>
 				</form>
+
+
 			</div>
 		</div>
 

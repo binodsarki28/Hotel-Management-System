@@ -85,5 +85,25 @@ public class DashboardService {
 			return null;
 		}
 	}
+	
+	public String getTotalBookings() {
+		if (isConnectionError) {
+			return null;
+		}
+
+		String countQuery = "SELECT COUNT(*) AS total FROM booking;";
+		try (PreparedStatement stmt = dbConn.prepareStatement(countQuery)) {
+
+			ResultSet result = stmt.executeQuery();
+			if (result.next()) {
+				return result.getString("total");
+			} else {
+				return "";
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 }

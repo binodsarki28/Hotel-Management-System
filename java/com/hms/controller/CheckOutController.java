@@ -1,0 +1,60 @@
+package com.hms.controller;
+
+import com.hms.model.BookingModel;
+import com.hms.service.RoomService;
+import com.hms.service.UserService;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
+
+@WebServlet(asyncSupported = true, urlPatterns = { "/checkout"})
+public class CheckOutController extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+
+    private final UserService userService = new UserService();
+    private final RoomService roomService = new RoomService();
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        try {
+            int bookingId = Integer.parseInt(request.getParameter("bookingId"));
+
+            // Fetch the booking to get roomId
+            BookingModel booking = userService.getBookingById(bookingId);
+
+            if (booking == null) {
+                request.setAttribute("error", "Booking not found.");
+                request.getRequestDispatcher("/profile").forward(request, response);
+                return;
+            }
+
+            // Update booking status to "Checked Out"
+            boolean bookingUpdated = userService.updateBookingStatus(bookingId, "Checked Out");
+
+            // Update room status to "Available"
+            boolean roomUpdated = roomService.updateRoomStatus(booking.getRoomId(), "Available");
+
+            if (bookingUpdated && roomUpdated) {
+                request.setAttribute("message", "Checkout successful. Thank you!");
+            } else {
+                request.setAttribute("error", "Checkout failed.");
+            }
+
+            // Redirect or forward to profile or booking page
+            response.sendRedirect(request.getContextPath() + "/profile");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("error", "An error occurred during checkout.");
+            request.getRequestDispatcher("/profile").forward(request, response);
+        }
+    }
+}

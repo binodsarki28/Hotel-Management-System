@@ -29,9 +29,9 @@
         <div class="footer-section">
             <h2>Follow Us On:</h2>
             <div class="social-icons">
-                <a href="#" target="_blank"><img src="${pageContext.request.contextPath}/resources/logos/facebook.png" alt="Facebook" /></a>
-                <a href="#" target="_blank"><img src="${pageContext.request.contextPath}/resources/logos/twitter.png" alt="Twitter" /></a>
-                <a href="#" target="_blank"><img src="${pageContext.request.contextPath}/resources/logos/instagram.png" alt="Instagram" /></a>
+                <a href="https://www.facebook.com/" target="_blank"><img src="${pageContext.request.contextPath}/resources/logos/facebook.png" alt="Facebook" /></a>
+                <a href="https://x.com/" target="_blank"><img src="${pageContext.request.contextPath}/resources/logos/twitter.png" alt="Twitter" /></a>
+                <a href="https://instagram.com/" target="_blank"><img src="${pageContext.request.contextPath}/resources/logos/instagram.png" alt="Instagram" /></a>
             </div>
         </div>
     </div>

@@ -7,31 +7,36 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+import com.hms.model.BookingModel;
 import com.hms.model.UserModel;
+import com.hms.service.UserService;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(asyncSupported = true, urlPatterns = { "/profile" })
 public class ProfileController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Get the session
-        HttpSession session = req.getSession(false); // false means don't create a new session if it doesn't exist
+        HttpSession session = req.getSession(false);
 
-        // Check if the user is logged in (i.e., if the loggedInUser exists in the session)
         if (session == null || session.getAttribute("loggedInUser") == null) {
-            // If the user is not logged in, redirect to the login page
             resp.sendRedirect(req.getContextPath() + "/login");
-        } else {
-            // User is logged in, retrieve the user object from the session
-            UserModel loggedInUser = (UserModel) session.getAttribute("loggedInUser");
-
-            // Set the logged-in user's data in the request for use in the profile page
-            req.setAttribute("loggedInUser", loggedInUser);
-
-            // Forward the request to the profile page
-            req.getRequestDispatcher("/WEB-INF/pages/profile/profile.jsp").forward(req, resp);
+            return;
         }
+
+        UserModel loggedInUser = (UserModel) session.getAttribute("loggedInUser");
+        req.setAttribute("loggedInUser", loggedInUser);
+
+        // Fetch booking list using UserService
+        UserService userService = new UserService();
+        List<BookingModel> bookingList = userService.getBookingsByUserId(loggedInUser.getUserId());
+
+        // Set booking list in request
+        req.setAttribute("bookings", bookingList);
+
+        // Forward to profile.jsp
+        req.getRequestDispatcher("/WEB-INF/pages/profile/profile.jsp").forward(req, resp);
     }
 }

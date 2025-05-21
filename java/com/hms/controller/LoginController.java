@@ -14,9 +14,6 @@ import com.hms.model.UserModel;
 import com.hms.util.CookiesUtil;
 import com.hms.util.SessionUtil;
 
-/**
- * Servlet implementation class LoginController
- */
 @WebServlet(asyncSupported = true, urlPatterns = { "/login" })
 public class LoginController extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -30,40 +27,38 @@ public class LoginController extends HttpServlet {
         this.loginService = new LoginService();
     }
 
-    /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-     */
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/WEB-INF/pages/main/login.jsp").forward(req, resp);
     }
 
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-     */
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
-        if (!validationUtil.isNullOrEmpty("email") && !validationUtil.isNullOrEmpty("password")) {
+        if (!validationUtil.isNullOrEmpty(email) && !validationUtil.isNullOrEmpty(password)) {
 
             UserModel userModel = new UserModel(email, password);
             Boolean loginStatus = loginService.loginUser(userModel);
 
             if (loginStatus != null && loginStatus) {
-            	
-            	UserModel fullUser = loginService.getUserDetailsByEmail(email);
 
-                // Set the full user details in the session
-                SessionUtil.setAttribute(req, "loggedInUser", fullUser);
+                UserModel fullUser = loginService.getUserDetailsByEmail(email);
 
-                // Check if the user is an admin or regular user and redirect accordingly
-                if (email.equals("admin")) {
-                    CookiesUtil.addCookie(resp, "role", "admin", 5 * 30); // Admin role cookie
-                    resp.sendRedirect(req.getContextPath() + "/dashboard"); // Redirect to dashboard for admin
+                if (fullUser != null) {
+                    SessionUtil.setAttribute(req, "loggedInUser", fullUser);
+
+                    if (email.equals("admin@gmail.com")) {
+                        CookiesUtil.addCookie(resp, "role", "admin", 5 * 60 * 24);
+                        resp.sendRedirect(req.getContextPath() + "/dashboard");
+                    } else {
+                        CookiesUtil.addCookie(resp, "role", "user", 5 * 60 * 24);
+                        resp.sendRedirect(req.getContextPath() + "/home");
+                    }
                 } else {
-                    CookiesUtil.addCookie(resp, "role", "user", 5 * 30); // Regular user role cookie
-                    resp.sendRedirect(req.getContextPath() + "/profile"); // Redirect to profile page for regular user
+                    req.setAttribute("error", "Could not retrieve user details. Please try again.");
+                    req.getRequestDispatcher("/WEB-INF/pages/main/login.jsp").forward(req, resp);
                 }
+
             } else {
                 handleLoginFailure(req, resp, loginStatus);
             }
@@ -74,9 +69,6 @@ public class LoginController extends HttpServlet {
         }
     }
 
-    /**
-     * Handles login failures by setting attributes and forwarding to the login page.
-     */
     private void handleLoginFailure(HttpServletRequest req, HttpServletResponse resp, Boolean loginStatus)
             throws ServletException, IOException {
         String errorMessage;

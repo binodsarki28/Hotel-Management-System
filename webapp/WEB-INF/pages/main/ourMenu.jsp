@@ -39,7 +39,7 @@
         </div>
 
         <div class="view-menu">
-            <a href="${pageContext.request.contextPath}/pages/menu/menu.jsp">View All Menu</a>
+            <a href="${pageContext.request.contextPath}/menu">View All Menu</a>
         </div>
     </div>
 </body>

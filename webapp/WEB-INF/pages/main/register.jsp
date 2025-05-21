@@ -28,17 +28,17 @@
 
 		<div class="form-container">
 			<form action="${pageContext.request.contextPath}/register"
-				method="post">
+				method="post" enctype="multipart/form-data">
 				<div class="form-row">
 					<div class="form-field">
 						<label for="fullName" class="form-label">Full Name:</label> <input
 							type="text" id="fullName" name="fullName" class="form-input"
-							value="${param.fullName}" required>
+							value="${fullName}" required>
 					</div>
 					<div class="form-field">
 						<label for="email" class="form-label">Email:</label> <input
 							type="email" id="email" name="email" class="form-input"
-							value="${param.email}" required>
+							value="${email}" required>
 					</div>
 				</div>
 
@@ -46,7 +46,7 @@
 					<div class="form-field">
 						<label for="phoneNumber" class="form-label">Phone No:</label> <input
 							type="text" id="phoneNumber" name="phoneNumber"
-							class="form-input" value="${param.phoneNumber}" required>
+							class="form-input" value="${phoneNumber}" required>
 					</div>
 					<div class="form-field">
 						<label for="gender" class="form-label">Gender:</label> <select
@@ -69,6 +69,14 @@
 							name="retypePassword" class="form-input" required>
 					</div>
 				</div>
+				
+				<div class="form-row">
+                    <div class="form-field" style="width: 100%;">
+                        <label for="profilePhoto" class="form-label">Profile Photo:</label>
+                        <input type="file" id="profilePhoto" name="profilePhoto"
+                               class="form-input" required>
+                    </div>
+                </div>
 
 				<input type="hidden" name="role" value="user" />
 

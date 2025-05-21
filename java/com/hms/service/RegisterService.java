@@ -35,8 +35,8 @@ public class RegisterService {
 	        return null;
 	    }
 
-	    String insertQuery = "INSERT INTO user (full_name, email, phone_number, gender, password, role) "
-	            + "VALUES (?, ?, ?, ?, ?, ?)"; // Notice the correct number of placeholders
+	    String insertQuery = "INSERT INTO user (full_name, email, phone_number, gender, password, profile_photo, role) "
+	            + "VALUES (?, ?, ?, ?, ?, ?, ?)"; // Notice the correct number of placeholders
 
 	    try {
 	        PreparedStatement insertStmt = dbConn.prepareStatement(insertQuery);
@@ -46,7 +46,8 @@ public class RegisterService {
 	        insertStmt.setString(3, userModel.getPhoneNumber());
 	        insertStmt.setString(4, userModel.getGender());
 	        insertStmt.setString(5, userModel.getPassword());
-	        insertStmt.setString(6, "USER");
+	        insertStmt.setString(6, userModel.getProfilePhoto());
+	        insertStmt.setString(7, "USER");
 	  
 	        // Execute the update and return true if successful
 	        return insertStmt.executeUpdate() > 0;

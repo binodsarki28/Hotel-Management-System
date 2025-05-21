@@ -73,6 +73,7 @@ public class AddRoomService {
 
 	        while (rs.next()) {
 	            RoomModel room = new RoomModel(
+	            	rs.getInt("room_id"),
 	                rs.getInt("room_no"),
 	                rs.getString("room_type"),
 	                rs.getString("room_description"),

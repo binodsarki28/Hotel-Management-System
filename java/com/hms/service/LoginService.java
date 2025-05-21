@@ -87,11 +87,14 @@ public class LoginService {
 	        ResultSet result = stmt.executeQuery();
 
 	        if (result.next()) {
-	            user = new UserModel();
+	            user = new UserModel(0, query, query, query, query, query, query, query);
+	            user.setUserId(result.getInt("user_id"));
+	            user.setFullName(result.getString("full_name"));
 	            user.setEmail(result.getString("email"));
 	            user.setFullName(result.getString("full_name"));
 	            user.setPhoneNumber(result.getString("phone_number"));
 	            user.setGender(result.getString("gender"));
+	            user.setProfilePhoto(result.getString("profile_photo"));
 	            // Add other fields as needed
 	        }
 	    } catch (SQLException e) {

@@ -14,7 +14,7 @@ import com.hms.service.RoomService;
 /**
  * Servlet implementation class RoomInfoController
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/roomInfo"})
+@WebServlet(asyncSupported = true, urlPatterns = { "/dashboard/roomInfo"})
 public class RoomInfoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -37,12 +37,5 @@ public class RoomInfoController extends HttpServlet {
 		req.getRequestDispatcher("/WEB-INF/pages/admin/roomInfo.jsp").forward(req, resp);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
 
 }

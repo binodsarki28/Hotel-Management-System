@@ -12,35 +12,60 @@ public class UserModel {
 	private String phoneNumber;
 	private String gender;
 	private String password;
+	private String profilePhoto;
 	private String role;
-	
-	public UserModel() {
-
-	}
 	
 	public UserModel(String email, String password) {
 		this.email = email;
 		this.password = password;
 	}
 	
-	public UserModel(int userId, String fullName, String email, String phoneNumber, String gender, String password, String role) {
+	public UserModel(int userId, String fullName, String email, String phoneNumber, String gender, String password, String profilePhoto, String role) {
 		this.userId = userId;
 		this.fullName = fullName;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.gender = gender;
 		this.password = password;
+		this.profilePhoto = profilePhoto;
 		this.role = role;
 	}
+	
+	
 
-	public UserModel(String fullName, String email, String phoneNumber, String gender, String password, String role) {
+	
+
+	public UserModel(int userId, String fullName, String email, String phoneNumber, String gender, String password,
+			String profilePhoto) {
+		super();
+		this.userId = userId;
+		this.fullName = fullName;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.gender = gender;
+		this.password = password;
+		this.profilePhoto = profilePhoto;
+	}
+
+	public UserModel(String fullName, String email, String phoneNumber, String gender, String password,
+			String profilePhoto, String role) {
 		super();
 		this.fullName = fullName;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.gender = gender;
 		this.password = password;
+		this.profilePhoto = profilePhoto;
 		this.role = role;
+	}
+
+	public UserModel(int userId, String fullName, String email, String phoneNumber, String gender) {
+		super();
+		this.userId = userId;
+		this.fullName = fullName;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.gender = gender;
 	}
 
 	public int getUserId() {
@@ -78,6 +103,14 @@ public class UserModel {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getProfilePhoto() {
+		return profilePhoto;
+	}
+
+	public void setProfilePhoto(String profilePhoto) {
+		this.profilePhoto = profilePhoto;
 	}
 
 	public String getRole() {

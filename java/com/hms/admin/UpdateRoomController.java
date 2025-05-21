@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Servlet implementation class UpdateRoomController
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/updateRoom"})
+@WebServlet(asyncSupported = true, urlPatterns = { "/dashboard/updateRoom"})
 public class UpdateRoomController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -35,6 +35,8 @@ public class UpdateRoomController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+		
+		
 	}
 
 }

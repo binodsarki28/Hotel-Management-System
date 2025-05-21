@@ -25,10 +25,8 @@ public class AdminDashboardController extends HttpServlet {
         req.setAttribute("total", dashboardService.getTotalUsers());
         req.setAttribute("room", dashboardService.getTotalRooms());
         req.setAttribute("menu", dashboardService.getTotalMenus());
+        req.setAttribute("booking", dashboardService.getTotalBookings());
         req.getRequestDispatcher("/WEB-INF/pages/admin/dashboard.jsp").forward(req, resp);
     }
-
-
-	
 
 }
